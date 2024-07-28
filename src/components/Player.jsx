@@ -1,22 +1,18 @@
 import React, { useState, useRef } from 'react';
 
 export default function Player() {
+  const playerName = useRef(null);
   const [name, setName] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
 
-  function handleName(event) {
-    setSubmitted(false);
-    setName(event.target.value);
-  }
-  function hadleSubmit() {
-    setSubmitted(true);
+  function handleName() {
+    setName(playerName.current.value);
   }
   return (
     <section id="player">
-      <h2>Welcome { submitted ? name : 'unknown entity' } </h2>
+      <h2>Welcome { name ?? 'unknown entity' } </h2>
       <p>
-        <input type="text" value={ name } onChange={ handleName } />
-        <button onClick={ hadleSubmit } >Set Name</button>
+        <input type="text" ref={ playerName } />
+        <button onClick={ handleName } >Set Name</button>
       </p>
     </section>
   );
